@@ -1,0 +1,8 @@
+  ┌ Running "palindrome" benchmarks...
+  ├─ Naive solution x 3,679,753 ops/sec ±0.64% (90 runs sampled)
+  ├─ for loop x 18,527,637 ops/sec ±0.76% (94 runs sampled)
+  ├─ for..of loop x 14,569,976 ops/sec ±0.70% (89 runs sampled)
+  ├─ arr.every x 7,714,492 ops/sec ±1.67% (88 runs sampled)
+  └ Done!
+
+Fastest is "for loop"
