@@ -1,0 +1,8 @@
+  ┌ Running "reversestring" benchmarks...
+  ├─ Naive Reverse x 2,997,231 ops/sec ±0.66% (90 runs sampled)
+  ├─ for loop x 11,667,641 ops/sec ±0.73% (91 runs sampled)
+  ├─ for..of loop x 9,671,359 ops/sec ±1.11% (89 runs sampled)
+  ├─ arr.reduce x 5,908,220 ops/sec ±0.91% (90 runs sampled)
+  └ Done!
+
+Fastest is "for loop"

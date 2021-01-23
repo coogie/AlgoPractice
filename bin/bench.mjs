@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import fs from "fs";
 import path from "path";
 import chalk from "chalk";
 import { pathToFileURL } from "url";
@@ -7,23 +8,26 @@ const { log } = console;
 const args = process.argv.slice(2);
 
 if (args.length !== 1) {
-  console.log("ERROR!");
-  console.log("\t Script takes one argument only:");
-  console.log("\t npm run bench <suite_name>");
+  console.error("ERROR!");
+  console.error("\t Script takes one argument only:");
+  console.error("\t npm run bench <suite_name>\n");
+  process.exit(1);
 }
 
 const exercise = args[0];
-const exerciseFile = path.join(
-  process.cwd(),
-  "exercises",
-  exercise,
-  "index.mjs"
-);
+const exerciseDir = path.join(process.cwd(), "exercises", exercise);
+const exerciseFile = path.join(exerciseDir, "index.mjs");
 const exerciseImport = pathToFileURL(exerciseFile);
 
 (async () => {
   const exporteds = await import(exerciseImport);
   const { data } = exporteds;
+
+  if (!data) {
+    console.error("ERROR!");
+    console.error("\t Benchmark missing `data` export to use as argument\n");
+    process.exit(1);
+  }
 
   const suite = new Benchmark.Suite();
   for (const exported in exporteds) {
@@ -34,20 +38,25 @@ const exerciseImport = pathToFileURL(exerciseFile);
     });
   }
 
-  suite
-    .on("start", () => {
-      log(`  ┌ Running "${chalk.cyan(exercise)}" benchmarks...`);
-    })
-    .on("cycle", (event) => {
-      log(`  ├─ ${event.target}`);
-    })
-    .on("complete", function () {
-      log(`  └ ${chalk.green("Done!")}`);
-      log(
-        `\nFastest is "${chalk.underline.green(
-          this.filter("fastest").map("name")
-        )}"\n`
-      );
-    })
-    .run({ async: false });
+  const stream = fs.createWriteStream(path.join(exerciseDir, "bench.txt"));
+  stream.once("open", () => {
+    suite
+      .on("start", () => {
+        log(`  ┌ Running "${chalk.cyan(exercise)}" benchmarks...`);
+        stream.write(`  ┌ Running "${exercise}" benchmarks...\n`);
+      })
+      .on("cycle", (event) => {
+        const out = `  ├─ ${event.target}`;
+        log(out);
+        stream.write(`${out}\n`);
+      })
+      .on("complete", function () {
+        const fastest = this.filter("fastest").map("name");
+        log(`  └ ${chalk.green("Done!")}`);
+        stream.write(`  └ Done!\n`);
+        log(`\nFastest is "${chalk.underline.green(fastest)}"\n`);
+        stream.write(`\nFastest is "${fastest}"\n`);
+      })
+      .run();
+  });
 })();
