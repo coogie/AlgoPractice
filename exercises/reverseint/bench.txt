@@ -1,0 +1,5 @@
+  ┌ Running "reverseint" benchmarks...
+  ├─ Naive solution x 2,631,048 ops/sec ±0.37% (95 runs sampled)
+  └ Done!
+
+Fastest is "Naive solution"
