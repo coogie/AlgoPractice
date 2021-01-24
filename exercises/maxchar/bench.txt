@@ -1,0 +1,5 @@
+  ┌ Running "maxchar" benchmarks...
+  ├─ for..of loop x 2,920,606 ops/sec ±0.51% (92 runs sampled)
+  └ Done!
+
+Fastest is "for..of loop"
