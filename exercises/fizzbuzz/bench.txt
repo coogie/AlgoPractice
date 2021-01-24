@@ -1,0 +1,6 @@
+  ┌ Running "fizzbuzz" benchmarks...
+  ├─ if/elseif x 7,616,112 ops/sec ±1.07% (91 runs sampled)
+  ├─ complex comparisons x 6,096,477 ops/sec ±0.87% (94 runs sampled)
+  └ Done!
+
+Fastest is "if/elseif"
