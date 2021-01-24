@@ -44,6 +44,9 @@ const exerciseImport = pathToFileURL(exerciseFile);
       .on("start", () => {
         log(`  ┌ Running "${chalk.cyan(exercise)}" benchmarks...`);
         stream.write(`  ┌ Running "${exercise}" benchmarks...\n`);
+        // If a method under bench actually calls out to console.log, not only
+        // does the console get polluted, but it dramatically impacts perf.
+        global.console.log = () => {};
       })
       .on("cycle", (event) => {
         const out = `  ├─ ${event.target}`;
@@ -56,6 +59,8 @@ const exerciseImport = pathToFileURL(exerciseFile);
         stream.write(`  └ Done!\n`);
         log(`\nFastest is "${chalk.underline.green(fastest)}"\n`);
         stream.write(`\nFastest is "${fastest}"\n`);
+        // Restore console.log
+        global.console.log = log;
       })
       .run();
   });
