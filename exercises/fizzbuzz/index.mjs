@@ -12,7 +12,7 @@
 //   4
 //   buzz
 
-export const data = 20;
+export const data = [20];
 
 /**
  * Simple if/elseif statements to determine output

@@ -34,7 +34,7 @@ const exerciseImport = pathToFileURL(exerciseFile);
     const func = exporteds[exported];
     if (typeof func !== "function") continue;
     suite.add(`${func.testname || func.name}`, () => {
-      func(data);
+      func.apply(null, data);
     });
   }
 

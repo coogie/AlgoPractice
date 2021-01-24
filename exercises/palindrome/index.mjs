@@ -7,7 +7,7 @@
 //   palindrome("abba") === true
 //   palindrome("abcdefg") === false
 
-export const data = "racecar";
+export const data = ["racecar"];
 
 /**
  * Convert the string to an array, then call the .reverse method on the array.

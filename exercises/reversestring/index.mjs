@@ -6,7 +6,7 @@
 //   reverse('hello') === 'olleh'
 //   reverse('Greetings!') === '!sgniteerG'
 
-export const data = "Greetings!";
+export const data = ["Greetings!"];
 
 /**
  * Convert the string to an array, then call the .reverse method on the array.

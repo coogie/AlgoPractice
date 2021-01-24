@@ -5,7 +5,7 @@
 // maxChar("abcccccccd") === "c"
 // maxChar("apple 1231111") === "1"
 
-export const data = "abcccccccd";
+export const data = ["abcccccccd"];
 
 /**
  * Loops through the given input and builds a map of characters that appear in

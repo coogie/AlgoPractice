@@ -8,7 +8,7 @@
 //   reverseInt(-15) === -51
 //   reverseInt(-90) === -9
 
-export const data = -4894;
+export const data = [-4894];
 
 /**
  * Converts the input to a string, splits it into an array, reverses the array,
