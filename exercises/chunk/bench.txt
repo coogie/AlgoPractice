@@ -1,0 +1,8 @@
+  ┌ Running "chunk" benchmarks...
+  ├─ while with forloop x 9,036,525 ops/sec ±1.85% (86 runs sampled)
+  ├─ single forloop x 3,824,837 ops/sec ±0.21% (97 runs sampled)
+  ├─ for..of loop x 3,806,454 ops/sec ±0.58% (92 runs sampled)
+  ├─ while with arr.slice x 7,165,132 ops/sec ±0.36% (94 runs sampled)
+  └ Done!
+
+Fastest is "while with forloop"
